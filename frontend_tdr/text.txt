@@ -1,0 +1,21 @@
+<div className="App">
+      {/* <h1>Dashboard de Mantenimiento Predictivo</h1>
+      <div>
+        <h2>Gráfica de Mantenimiento</h2>
+        <iframe
+          src="http://127.0.0.1:8050/iris"
+          width="100%"
+          height="600px"
+          title="Gráfica de Mantenimiento"
+        ></iframe>
+      </div>
+      <div>
+        <h2>Gráfica de Gapminder</h2>
+        <iframe
+          src="http://127.0.0.1:8050/gapminder"
+          width="100%"
+          height="600px"
+          title="Gráfica de Gapminder"
+        ></iframe>
+      </div> */}
+    </div>
