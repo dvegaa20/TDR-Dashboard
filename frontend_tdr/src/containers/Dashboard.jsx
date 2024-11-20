@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 
@@ -19,7 +20,11 @@ function Dashboard() {
                 <h2 className="text-customBlue text-lg font-semibold">
                   Estadísticas de Mantenimiento
                 </h2>
-                <p className="text-customBlue cursor-pointer">See all</p>
+                <Link to="/stats">
+                  <p className="text-sm text-customBlue cursor-pointer hover:text-blue-900 hover:underline hover:decoration-dashed">
+                    See all
+                  </p>
+                </Link>
               </div>
               <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
                 <iframe
@@ -33,11 +38,15 @@ function Dashboard() {
                 <h2 class="text-customBlue text-lg font-semibold">
                   Estado de Refacciones
                 </h2>
-                <p className="text-customBlue cursor-pointer">See all</p>
+                <Link to="/tractos">
+                  <p className="text-sm text-customBlue cursor-pointer hover:text-blue-900 hover:underline hover:decoration-dashed">
+                    See all
+                  </p>
+                </Link>
               </div>
               <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
                 <iframe
-                  src="http://localhost:8050/gapminder"
+                  src="http://localhost:8050/tractos_age"
                   style={{ border: "none", height: "100%", width: "100%" }}
                 ></iframe>
               </div>
@@ -54,7 +63,11 @@ function Dashboard() {
                 <h2 className="text-customBlue text-lg font-semibold">
                   Actividades de Mantenimiento
                 </h2>
-                <p className="text-customBlue cursor-pointer">See all</p>
+                <Link to="/mantenimientos">
+                  <p className="text-sm text-customBlue cursor-pointer hover:text-blue-900 hover:underline hover:decoration-dashed">
+                    See all
+                  </p>
+                </Link>
               </div>
               <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
                 <iframe
@@ -68,7 +81,11 @@ function Dashboard() {
                 <h2 className="text-customBlue text-lg font-semibold">
                   Resumen de Gastos
                 </h2>
-                <p className="text-customBlue cursor-pointer">See all</p>
+                <Link to="/gastos">
+                  <p className="text-sm text-customBlue cursor-pointer hover:text-blue-900 hover:underline hover:decoration-dashed">
+                    See all
+                  </p>
+                </Link>
               </div>
               <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
                 <iframe
