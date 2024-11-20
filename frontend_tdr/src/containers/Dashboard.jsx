@@ -7,259 +7,108 @@ function Dashboard() {
     <div>
       <Sidebar />
       <Navbar />
-      <div class="p-4 sm:ml-64">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-          <div class="grid grid-cols-3 gap-4 mb-4">
-            <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
+      <div className="p-4 sm:ml-64">
+        <div className="p-4 rounded-lg dark:border-gray-700">
+          {/* First grid with 2.5fr and 1.5fr columns */}
+          <div
+            className="grid"
+            style={{ gridTemplateColumns: "2.5fr 1.5fr", gap: "1rem" }}
+          >
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-customBlue text-lg font-semibold">
+                  Estadísticas de Mantenimiento
+                </h2>
+                <p className="text-customBlue cursor-pointer">See all</p>
+              </div>
+              <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
+                <iframe
+                  src="http://localhost:8050/iris"
+                  style={{ border: "none", height: "100%", width: "100%" }}
+                ></iframe>
+              </div>
             </div>
-            <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center mb-2">
+                <h2 class="text-customBlue text-lg font-semibold">
+                  Estado de Refacciones
+                </h2>
+                <p className="text-customBlue cursor-pointer">See all</p>
+              </div>
+              <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
+                <iframe
+                  src="http://localhost:8050/gapminder"
+                  style={{ border: "none", height: "100%", width: "100%" }}
+                ></iframe>
+              </div>
             </div>
           </div>
-          <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg
-                class="w-3.5 h-3.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 18 18"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 1v16M1 9h16"
-                />
-              </svg>
-            </p>
-          </div>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
+
+          {/* Second grid with 1fr and 1fr columns */}
+          <div
+            className="grid mt-8"
+            style={{ gridTemplateColumns: "2.5fr 1.5fr", gap: "1rem" }}
+          >
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-customBlue text-lg font-semibold">
+                  Actividades de Mantenimiento
+                </h2>
+                <p className="text-customBlue cursor-pointer">See all</p>
+              </div>
+              <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
+                <iframe
+                  src="http://localhost:8050/iris"
+                  style={{ border: "none", height: "100%", width: "100%" }}
+                ></iframe>
+              </div>
             </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-customBlue text-lg font-semibold">
+                  Resumen de Gastos
+                </h2>
+                <p className="text-customBlue cursor-pointer">See all</p>
+              </div>
+              <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
+                <iframe
+                  src="http://localhost:8050/gapminder"
+                  style={{ border: "none", height: "100%", width: "100%" }}
+                ></iframe>
+              </div>
             </div>
           </div>
-          <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg
-                class="w-3.5 h-3.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 18 18"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 1v16M1 9h16"
-                />
-              </svg>
-            </p>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
+
+          {/* Third grid with 1fr 1fr column */}
+          <div
+            className="grid mt-8"
+            style={{ gridTemplateColumns: "1.5fr 2.5fr", gap: "1rem" }}
+          >
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-customBlue text-lg font-semibold">
+                  Actividades de Mantenimiento
+                </h2>
+              </div>
+              <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
+                <iframe
+                  src="http://localhost:8050/iris"
+                  style={{ border: "none", height: "100%", width: "100%" }}
+                ></iframe>
+              </div>
             </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg
-                  class="w-3.5 h-3.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
-              </p>
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-customBlue text-lg font-semibold">
+                  Resumen de Gastos
+                </h2>
+              </div>
+              <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
+                <iframe
+                  src="http://localhost:8050/gapminder"
+                  style={{ border: "none", height: "100%", width: "100%" }}
+                ></iframe>
+              </div>
             </div>
           </div>
         </div>
