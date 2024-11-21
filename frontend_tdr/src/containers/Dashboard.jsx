@@ -89,7 +89,7 @@ function Dashboard() {
               </div>
               <div className="flex flex-col items-center justify-center h-auto p-4 bg-gray-50 dark:bg-gray-800">
                 <iframe
-                  src="http://localhost:8050/gapminder"
+                  src="http://localhost:8050/cost_distribution"
                   style={{ border: "none", height: "100%", width: "100%" }}
                 ></iframe>
               </div>
