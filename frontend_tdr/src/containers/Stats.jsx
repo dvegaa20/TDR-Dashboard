@@ -10,7 +10,12 @@ function Stats() {
           <h2 className="text-customBlue text-lg font-semibold mb-4">
             Estadísticas de Mantenimiento
           </h2>
-          <Component />
+          <Component
+            iframeSrc1="http://localhost:8050/failure_frequency"
+            iframeSrc2="http://localhost:8050/avg_repair_frecuency"
+            iframeSrc3="http://localhost:8050/monthly_repair_distribution"
+            iframeSrc4="http://localhost:8050/mtbf"
+          />
           <Table />
         </div>
       </div>

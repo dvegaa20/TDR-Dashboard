@@ -11,11 +11,11 @@ const customTheme = {
   },
   indicators: {
     active: {
-      off: "bg-white/50 hover:bg-white dark:bg-gray-800/50 dark:hover:bg-gray-800",
-      on: "bg-white dark:bg-gray-800",
+      off: "hidden",
+      on: "hidden",
     },
-    base: "h-3 w-3 rounded-full",
-    wrapper: "absolute bottom-5 left-1/2 flex -translate-x-1/2 space-x-3",
+    base: "hidden",
+    wrapper: "hidden",
   },
   item: {
     base: "absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2",
