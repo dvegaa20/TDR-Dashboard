@@ -1,4 +1,3 @@
-// App.jsx
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -9,7 +8,6 @@ import Trucks from "./containers/Trucks";
 import Maintenance from "./containers/Maintenance";
 import Spendings from "./containers/Spendings";
 import Predictive from "./containers/Predictive";
-
 import "./app.css";
 
 function App() {

@@ -25,7 +25,7 @@ function Dashboard() {
             />
           </div>
 
-          {/* Second grid with 1fr and 1fr columns */}
+          {/* Second grid with 2.5fr and 1.5fr columns */}
           <div
             className="grid mt-8"
             style={{ gridTemplateColumns: "2.5fr 1.5fr", gap: "1rem" }}
@@ -44,7 +44,7 @@ function Dashboard() {
             />
           </div>
 
-          {/* Third grid with 1fr 1fr column */}
+          {/* Third grid with 1.5fr 2.5fr column */}
           <div
             className="grid mt-8"
             style={{ gridTemplateColumns: "1.5fr 2.5fr", gap: "1rem" }}
