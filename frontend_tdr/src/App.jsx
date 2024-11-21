@@ -6,6 +6,7 @@ import Stats from "./containers/Stats";
 import Trucks from "./containers/Trucks";
 import Maintenance from "./containers/Maintenance";
 import Spendings from "./containers/Spendings";
+import Predictive from "./containers/Predictive";
 
 import "./app.css";
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/tractos" element={<Trucks />} />
             <Route path="/mantenimientos" element={<Maintenance />} />
             <Route path="/gastos" element={<Spendings />} />
+            <Route path="/predictive" element={<Predictive />} />
           </Routes>
         </div>
       </div>
