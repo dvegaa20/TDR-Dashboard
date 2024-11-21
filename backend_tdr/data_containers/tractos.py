@@ -35,34 +35,30 @@ def vehicle_age(data):
 
 
 def repair_frecuency(data):
-    # Calcular frecuencia de reparaciones por unidad
     component_freq_total = data["UnitNumber"].value_counts()
 
-    # Crear el gráfico con barras horizontales
     fig_repair_frecuency = px.bar(
         x=component_freq_total.values,
         y=component_freq_total.index,
-        orientation="h",  # Orientación horizontal
+        orientation="h",
         labels={"x": "Frecuencia de Reparaciones", "y": "Código de la Unidad"},
         title="Frecuencia Total de Reparación de Componentes",
     )
 
-    # Ajustar el diseño del gráfico
     fig_repair_frecuency.update_layout(
         margin=dict(l=50, r=30, t=40, b=40),
-        paper_bgcolor="rgba(255,255,255,1)",  # Fondo blanco
+        paper_bgcolor="rgba(255,255,255,1)",
         plot_bgcolor="rgba(255,255,255,1)",
         xaxis_title="Frecuencia de Reparaciones",
         yaxis_title="Código de la Unidad",
     )
 
-    # Retornar el gráfico como un componente Dash
     return html.Div(
         [
             dcc.Graph(
                 id="repair-frequency-graph",
                 figure=fig_repair_frecuency,
-                config={"displayModeBar": True},  # Mostrar barra de herramientas
+                config={"displayModeBar": True},
                 style={"height": "89vh", "width": "97vw"},
             )
         ]

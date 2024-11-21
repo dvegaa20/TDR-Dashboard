@@ -1,35 +1,64 @@
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc, html
 from dash.dependencies import Input, Output
-from data_containers.layouts import iris_layout
+from data_containers.stats import (
+    failure_frequency,
+    average_repair_frecuency,
+    monthly_failure_distribution,
+    mtbf,
+)
 from data_containers.tractos import vehicle_age, repair_frecuency
+
+# from data_containers.maintenance import maintenance_distribution
 from data_containers.spendings import cost_distribution
+
+# from data_containers.predictive import predictive_layout
 from data import tdr_data
 
 
 app = dash.Dash(__name__)
 server = app.server
 
-# Layout de la app
 app.layout = html.Div(
     [dcc.Location(id="url", refresh=False), html.Div(id="page-content")]
 )
 
 
-# Callbacks para actualizar el contenido según la URL
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def display_page(pathname):
-    if pathname == "/iris":
-        return iris_layout(tdr_data)
+    """
+    Function to render the page based on the url pathname.
+    It calls the corresponding function from the data_containers module
+    to generate the page content.
+    """
+
+    # Stats
+    if pathname == "/failure_frequency":
+        return failure_frequency(tdr_data)
+    elif pathname == "/avg_repair_frecuency":
+        return average_repair_frecuency(tdr_data)
+    elif pathname == "/monthly_repair_distribution":
+        return monthly_failure_distribution(tdr_data)
+    elif pathname == "/mtbf":
+        return mtbf(tdr_data)
+
+    # Tractos
     elif pathname == "/tractos_age":
         return vehicle_age(tdr_data)
     elif pathname == "/tractos_repair_distribution":
         return repair_frecuency(tdr_data)
+
+    # Mantenimientos
+
+    # Gastos
     elif pathname == "/cost_distribution":
         return cost_distribution(tdr_data)
+
+    # Análisis Predictivo
+
+    # 404
     else:
-        return "404"
+        return "Error al cargar la gráfica"
 
 
 if __name__ == "__main__":
