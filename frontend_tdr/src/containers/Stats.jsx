@@ -1,13 +1,9 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
 import Component from "../components/Carousel";
 
 function Stats() {
   return (
     <div>
-      <Sidebar />
-      <Navbar />
       <div className="p-4 sm:ml-64">
         <div className="p-4 rounded-lg dark:border-gray-700">
           <h2 className="text-customBlue text-lg font-semibold mb-4">

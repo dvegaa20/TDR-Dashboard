@@ -1,14 +1,9 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import Sidebar from "../components/Sidebar"
-import Navbar from "../components/Navbar"
-import GraphContainer from "../components/DashboardGraphContainer"
+import React from "react";
+import GraphContainer from "../components/DashboardGraphContainer";
 
 function Dashboard() {
   return (
     <div>
-      <Sidebar />
-      <Navbar />
       <div className="p-4 sm:ml-64">
         <div className="p-4 rounded-lg dark:border-gray-700">
           {/* First grid with 2.5fr and 1.5fr columns */}
@@ -66,7 +61,7 @@ function Dashboard() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

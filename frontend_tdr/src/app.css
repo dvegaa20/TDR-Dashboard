@@ -13,3 +13,18 @@ a {
   text-decoration: none;
   color: unset;
 }
+
+.glowing {
+  animation: glow 1.5s infinite alternate-reverse;
+}
+
+@keyframes glow {
+  from {
+    fill: #111827;
+    color: #111827;
+  }
+  to {
+    fill: #f9b233;
+    color: #f9b233;
+  }
+}

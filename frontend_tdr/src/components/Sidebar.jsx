@@ -142,15 +142,15 @@ function Sidebar() {
                 to="/predictive"
                 className={`flex items-center p-2 rounded-lg group ${
                   location.pathname === "/predictive"
-                    ? "bg-gray-200 text-yellow-400"
-                    : "text-gray-900 hover:bg-gray-100"
+                    ? "bg-gray-200"
+                    : "hover:bg-gray-100"
                 }`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="glowing w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 >
                   <path
                     fill-rule="evenodd"
@@ -158,7 +158,7 @@ function Sidebar() {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span className="ms-3 ">Análisis Predictivo</span>
+                <span className="ms-3 glowing">Análisis Predictivo</span>
               </Link>
             </li>
           </ul>

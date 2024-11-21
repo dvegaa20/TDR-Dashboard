@@ -1,6 +1,8 @@
 // App.jsx
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import Dashboard from "./containers/Dashboard";
 import Stats from "./containers/Stats";
 import Trucks from "./containers/Trucks";
@@ -15,6 +17,8 @@ function App() {
     <Router>
       <div className="app">
         <div className="content">
+          <Navbar />
+          <Sidebar />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/stats" element={<Stats />} />
