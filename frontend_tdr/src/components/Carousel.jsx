@@ -34,26 +34,16 @@ const customTheme = {
   },
 };
 
-export function Component(props) {
+export function Component({ iframeSrc1, iframeSrc2, iframeSrc3, iframeSrc4 }) {
+  const iframeStyle = { border: "none", height: "100%", width: "100%" };
+
   return (
     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
       <Carousel slide={false} theme={customTheme}>
-        <iframe
-          src="http://localhost:8050/tractos_age"
-          style={{ border: "none", height: "100%", width: "100%" }}
-        ></iframe>
-        <iframe
-          src="http://localhost:8050/tractos_repair_distribution"
-          style={{ border: "none", height: "100%", width: "100%" }}
-        ></iframe>
-        <iframe
-          src="http://localhost:8050/tractos_age"
-          style={{ border: "none", height: "100%", width: "100%" }}
-        ></iframe>
-        <img
-          src="https://flowbite.com/docs/images/carousel/carousel-5.svg"
-          alt="..."
-        />
+        <iframe src={iframeSrc1} style={iframeStyle}></iframe>
+        <iframe src={iframeSrc2} style={iframeStyle}></iframe>
+        <iframe src={iframeSrc3} style={iframeStyle}></iframe>
+        <iframe src={iframeSrc4} style={iframeStyle}></iframe>
       </Carousel>
     </div>
   );

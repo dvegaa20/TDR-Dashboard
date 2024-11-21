@@ -1,14 +1,9 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import Sidebar from "../components/Sidebar"
-import Navbar from "../components/Navbar"
-import GraphContainer from "../components/DashboardGraphContainer"
+import React from "react";
+import GraphContainer from "../components/DashboardGraphContainer";
 
 function Dashboard() {
   return (
     <div>
-      <Sidebar />
-      <Navbar />
       <div className="p-4 sm:ml-64">
         <div className="p-4 rounded-lg dark:border-gray-700">
           {/* First grid with 2.5fr and 1.5fr columns */}
@@ -30,7 +25,7 @@ function Dashboard() {
             />
           </div>
 
-          {/* Second grid with 1fr and 1fr columns */}
+          {/* Second grid with 2.5fr and 1.5fr columns */}
           <div
             className="grid mt-8"
             style={{ gridTemplateColumns: "2.5fr 1.5fr", gap: "1rem" }}
@@ -49,7 +44,7 @@ function Dashboard() {
             />
           </div>
 
-          {/* Third grid with 1fr 1fr column */}
+          {/* Third grid with 1.5fr 2.5fr column */}
           <div
             className="grid mt-8"
             style={{ gridTemplateColumns: "1.5fr 2.5fr", gap: "1rem" }}
@@ -66,7 +61,7 @@ function Dashboard() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
