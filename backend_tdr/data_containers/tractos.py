@@ -3,63 +3,170 @@ import plotly.express as px
 import pandas as pd
 
 
+def standard_layout(fig):
+    fig.update_layout(
+        margin=dict(l=100, r=30, t=50, b=50),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(size=12),
+    )
+    return fig
+
+
+def standard_style(height="2000px", overflowY="scroll"):
+    return {
+        "overflowY": overflowY,
+        "height": height,
+        "border": "1px solid #ccc",
+        "padding": "10px",
+    }
+
+
+def unit_failure_distribution(data):
+    failures_per_vehicle = (
+        data.groupby("UnitNumber")["JobCode"]
+        .count()
+        .reset_index()
+        .rename(columns={"JobCode": "CantidadFallas"})
+    )
+
+    # Crear gráfico
+    fig_failures_per_vehicle = px.bar(
+        failures_per_vehicle,
+        x="UnitNumber",  # Mostrar solo los UnitNumbers existentes
+        y="CantidadFallas",
+        title="Distribución de Fallas por Tracto",
+        labels={
+            "UnitNumber": "Tracto (Unidad)",
+            "CantidadFallas": "Cantidad de Fallas",
+        },
+        text="CantidadFallas",
+    )
+
+    # Aplicar layout estándar
+    fig_failures_per_vehicle = standard_layout(fig_failures_per_vehicle)
+
+    # Personalizar estilo
+    fig_failures_per_vehicle.update_traces(
+        hovertemplate="Tracto (Unidad) = %{x}<br>Cantidad de Fallas = $%{y}",
+        marker=dict(
+            color="indianred", opacity=0.8, line=dict(color="black", width=1.5)
+        ),
+        textfont=dict(size=10),
+    )
+
+    # Asegurar que solo se muestran UnitNumbers reales
+    fig_failures_per_vehicle.update_layout(
+        xaxis=dict(
+            type="category",
+            tickangle=45,
+        )
+    )
+
+    return html.Div(
+        style=standard_style(height="88vh"),
+        children=[
+            dcc.Graph(
+                id="distribucion-fallas-vehiculo",
+                figure=fig_failures_per_vehicle,
+                config={"displayModeBar": False},
+                style={"height": "100%", "width": "97vw"},
+            )
+        ],
+    )
+
+
+def cost_per_unit(data):
+    cost_per_unit = (
+        data.groupby("UnitNumber")["TotalAmount"]
+        .sum()
+        .reset_index()
+        .rename(columns={"TotalAmount": "CostoTotal"})
+        .round(2)
+    )
+
+    fig_cost_per_unit = px.bar(
+        cost_per_unit,
+        x="UnitNumber",
+        y="CostoTotal",
+        title="Costo Total por Tracto",
+        labels={
+            "UnitNumber": "Tracto (Unidad)",
+            "CostoTotal": "Costo Total",
+        },
+        text="CostoTotal",
+    )
+
+    fig_cost_per_unit = standard_layout(fig_cost_per_unit)
+
+    fig_cost_per_unit.update_traces(
+        hovertemplate="Tracto (Unidad) = %{x}<br>Costo de Reparaciones = $%{y}",
+        marker=dict(
+            color="darkgreen", opacity=0.8, line=dict(color="black", width=1.5)
+        ),
+        textfont=dict(size=10),
+    )
+
+    fig_cost_per_unit.update_layout(
+        xaxis=dict(
+            type="category",
+            tickangle=45,
+        )
+    )
+
+    return html.Div(
+        style=standard_style(height="88vh"),
+        children=[
+            dcc.Graph(
+                id="costo-total-vehiculo",
+                figure=fig_cost_per_unit,
+                config={"displayModeBar": False},
+                style={"height": "100%", "width": "97vw"},
+            )
+        ],
+    )
+
+
 def vehicle_age(data):
     current_year = pd.to_datetime("today").year
     data["VehicleAge"] = current_year - data["UnitYear"]
 
-    vehicle_age_counts = data.groupby("VehicleAge")["UnitNumber"].nunique().sort_index()
+    vehicle_age_counts = (
+        data.groupby("VehicleAge")["UnitNumber"]
+        .nunique()
+        .reset_index()
+        .rename(columns={"UnitNumber": "CantidadTractos"})
+    )
 
     fig_vehicle_age = px.bar(
         vehicle_age_counts,
-        x=vehicle_age_counts.index,
-        y=vehicle_age_counts.values,
+        x="VehicleAge",
+        y="CantidadTractos",
+        title="Distribución de Tractos por Antigüedad",
+        labels={
+            "UnitNumber": "Tracto (Unidad)",
+            "VehicleAge": "Años de Antigüedad",
+            "CantidadTractos": "Cantidad de Tractos",
+        },
+        text="CantidadTractos",
     )
 
-    fig_vehicle_age.update_layout(
-        margin=dict(l=0, r=0, t=0, b=0),
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-        xaxis_title="Conteo por Antiguedad de Tractos",
-        yaxis_title=None,
+    fig_vehicle_age = standard_layout(fig_vehicle_age)
+
+    fig_vehicle_age.update_traces(
+        marker=dict(
+            color="royalblue", opacity=0.8, line=dict(color="black", width=1.5)
+        ),
+        textfont=dict(size=10),
     )
     return html.Div(
-        [
+        style=standard_style(height="88vh"),
+        children=[
             dcc.Graph(
-                id="iris-graph",
+                id="distribucion-fallas-mes",
                 figure=fig_vehicle_age,
                 config={"displayModeBar": False},
-                style={"height": "89vh", "width": "97vw"},
+                style={"height": "100%", "width": "97vw"},
             )
-        ]
-    )
-
-
-def repair_frecuency(data):
-    component_freq_total = data["UnitNumber"].value_counts()
-
-    fig_repair_frecuency = px.bar(
-        x=component_freq_total.values,
-        y=component_freq_total.index,
-        orientation="h",
-        labels={"x": "Frecuencia de Reparaciones", "y": "Código de la Unidad"},
-        title="Frecuencia Total de Reparación de Componentes",
-    )
-
-    fig_repair_frecuency.update_layout(
-        margin=dict(l=50, r=30, t=40, b=40),
-        paper_bgcolor="rgba(255,255,255,1)",
-        plot_bgcolor="rgba(255,255,255,1)",
-        xaxis_title="Frecuencia de Reparaciones",
-        yaxis_title="Código de la Unidad",
-    )
-
-    return html.Div(
-        [
-            dcc.Graph(
-                id="repair-frequency-graph",
-                figure=fig_repair_frecuency,
-                config={"displayModeBar": True},
-                style={"height": "89vh", "width": "97vw"},
-            )
-        ]
+        ],
     )

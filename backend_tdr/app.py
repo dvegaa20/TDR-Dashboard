@@ -7,7 +7,11 @@ from data_containers.stats import (
     monthly_failure_distribution,
     mtbf,
 )
-from data_containers.tractos import vehicle_age, repair_frecuency
+from data_containers.tractos import (
+    vehicle_age,
+    unit_failure_distribution,
+    cost_per_unit,
+)
 
 # from data_containers.maintenance import maintenance_distribution
 from data_containers.spendings import cost_distribution
@@ -43,10 +47,12 @@ def display_page(pathname):
         return mtbf(tdr_data)
 
     # Tractos
+    elif pathname == "/tractos_failure_distribution":
+        return unit_failure_distribution(tdr_data)
+    elif pathname == "/tractos_cost_distribution":
+        return cost_per_unit(tdr_data)
     elif pathname == "/tractos_age":
         return vehicle_age(tdr_data)
-    elif pathname == "/tractos_repair_distribution":
-        return repair_frecuency(tdr_data)
 
     # Mantenimientos
 
