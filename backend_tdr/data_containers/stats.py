@@ -55,8 +55,7 @@ def failure_frequency(data):
     fig_fallas = standard_layout(fig_fallas)
 
     fig_fallas.update_traces(
-        marker=dict(color="steelblue", opacity=0.8,
-                    line=dict(color="black", width=1.5))
+        marker=dict(color="steelblue", opacity=0.8, line=dict(color="black", width=1.5))
     )
 
     return html.Div(
@@ -104,8 +103,7 @@ def average_repair_frecuency(data):
         y="ComponentCode",
         orientation="h",
         title="Promedio de Tiempos de Reparación por Componente",
-        labels={"ComponentCode": "Componente",
-                "PromedioDuracion": "Promedio (Horas)"},
+        labels={"ComponentCode": "Componente", "PromedioDuracion": "Promedio (Horas)"},
     )
 
     fig_tiempos = standard_layout(fig_tiempos)

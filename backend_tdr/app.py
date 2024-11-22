@@ -19,16 +19,46 @@ from data_containers.spendings import cost_distribution, maintenance_comparison_
 # from data_containers.predictive import predictive_layout
 from data import tdr_data
 from flask_cors import CORS
+from dash_dangerously_set_inner_html import DangerouslySetInnerHTML
 
 
 app = dash.Dash(__name__)
 server = app.server
-CORS(server, resources={r"/*": {"origins": "https://tdr-dashboard.vercel.app/"}})
-
+CORS(server)
 
 app.layout = html.Div(
-    [dcc.Location(id="url", refresh=False), html.Div(id="page-content")]
+    [
+        dcc.Location(id="url", refresh=False),
+        dcc.Loading(
+            id="loading",
+            type="dot",  # Puedes cambiar el tipo de loader: "default", "circle", "dot"
+            children=html.Div(id="page-content"),
+            style={
+                "position": "fixed",
+                "top": "50%",
+                "left": "50%",
+                "transform": "translate(-50%, -50%)",
+            },
+        ),
+    ]
 )
+
+route_map = {
+    # Stats
+    "/failure_frequency": failure_frequency,
+    "/avg_repair_frecuency": average_repair_frecuency,
+    "/monthly_repair_distribution": monthly_failure_distribution,
+    "/mtbf": mtbf,
+    # Tractos
+    "/tractos_failure_distribution": unit_failure_distribution,
+    "/tractos_cost_distribution": cost_per_unit,
+    "/tractos_age": vehicle_age,
+    # Mantenimientos
+    # Gastos
+    "/cost_distribution": cost_distribution,
+    "/calculate_maintenance_costs": maintenance_comparison_chart,
+    # Análisis Predictivo
+}
 
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
@@ -38,36 +68,8 @@ def display_page(pathname):
     It calls the corresponding function from the data_containers module
     to generate the page content.
     """
-
-    # Stats
-    if pathname == "/failure_frequency":
-        return failure_frequency(tdr_data)
-    elif pathname == "/avg_repair_frecuency":
-        return average_repair_frecuency(tdr_data)
-    elif pathname == "/monthly_repair_distribution":
-        return monthly_failure_distribution(tdr_data)
-    elif pathname == "/mtbf":
-        return mtbf(tdr_data)
-
-    # Tractos
-    elif pathname == "/tractos_failure_distribution":
-        return unit_failure_distribution(tdr_data)
-    elif pathname == "/tractos_cost_distribution":
-        return cost_per_unit(tdr_data)
-    elif pathname == "/tractos_age":
-        return vehicle_age(tdr_data)
-
-    # Mantenimientos
-
-    # Gastos
-    elif pathname == "/cost_distribution":
-        return cost_distribution(tdr_data)
-    elif pathname == "/calculate_maintenance_costs":
-        return maintenance_comparison_chart(tdr_data)
-
-    # Análisis Predictivo
-
-    # 404
+    if pathname in route_map:
+        return route_map[pathname](tdr_data)
     else:
         return "Error al cargar la gráfica (404)"
 
