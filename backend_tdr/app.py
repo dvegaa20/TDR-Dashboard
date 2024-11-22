@@ -19,7 +19,6 @@ from data_containers.spendings import cost_distribution, maintenance_comparison_
 # from data_containers.predictive import predictive_layout
 from data import tdr_data
 from flask_cors import CORS
-from dash_dangerously_set_inner_html import DangerouslySetInnerHTML
 
 
 app = dash.Dash(__name__)
