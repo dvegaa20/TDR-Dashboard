@@ -1,21 +1,21 @@
-import React from "react";
-import Component from "../components/Carousel";
-import Table from "../components/Table";
+import React from "react"
+import ChartCarousel from "../components/Carousel"
+import Table from "../components/Table"
 
 function Spendings() {
   return (
     <div>
       <div className="p-4 sm:ml-64">
-        <div className="p-4 rounded-lg dark:border-gray-700">
+        <div className="p-2 rounded-lg dark:border-gray-700">
           <h2 className="text-customBlue text-lg font-semibold mb-4">
-            Estadísticas de Mantenimiento
+            Estadísticas de Costos
           </h2>
-          <Component />
+          <ChartCarousel iframeSrc1="http://localhost:8050/calculate_maintenance_costs" />
           <Table />
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Spendings;
+export default Spendings

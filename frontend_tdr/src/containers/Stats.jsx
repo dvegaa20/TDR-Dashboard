@@ -1,6 +1,6 @@
-import React from "react";
-import Component from "../components/Carousel";
-import Table from "../components/Table";
+import React from "react"
+import ChartCarousel from "../components/Carousel"
+import Table from "../components/Table"
 
 function Stats() {
   return (
@@ -10,7 +10,7 @@ function Stats() {
           <h2 className="text-customBlue text-lg font-semibold mb-4">
             Estadísticas de Mantenimiento
           </h2>
-          <Component
+          <ChartCarousel
             iframeSrc1="http://localhost:8050/failure_frequency"
             iframeSrc2="http://localhost:8050/avg_repair_frecuency"
             iframeSrc3="http://localhost:8050/monthly_repair_distribution"
@@ -20,7 +20,7 @@ function Stats() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Stats;
+export default Stats

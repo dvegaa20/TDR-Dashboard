@@ -14,7 +14,7 @@ from data_containers.tractos import (
 )
 
 # from data_containers.maintenance import maintenance_distribution
-from data_containers.spendings import cost_distribution
+from data_containers.spendings import cost_distribution, maintenance_comparison_chart
 
 # from data_containers.predictive import predictive_layout
 from data import tdr_data
@@ -59,12 +59,14 @@ def display_page(pathname):
     # Gastos
     elif pathname == "/cost_distribution":
         return cost_distribution(tdr_data)
+    elif pathname == "/calculate_maintenance_costs":
+        return maintenance_comparison_chart(tdr_data)
 
     # Análisis Predictivo
 
     # 404
     else:
-        return "Error al cargar la gráfica"
+        return "Error al cargar la gráfica (404)"
 
 
 if __name__ == "__main__":
