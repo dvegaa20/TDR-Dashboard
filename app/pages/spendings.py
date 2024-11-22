@@ -3,6 +3,7 @@ from components.carousel import create_carousel
 from components.table import create_table
 import pandas as pd
 
+
 def spendings_page():
     """
     Create the spendings page layout.
@@ -24,7 +25,10 @@ def spendings_page():
     return html.Div(
         [
             create_carousel(carousel_images),
-            create_table(data),
+            html.Div(
+                create_table(data),
+                className="page-content",  # Matches unified styling
+            ),
         ],
-        className="page-content",
+        className="main-content",  # Ensures consistent layout width
     )

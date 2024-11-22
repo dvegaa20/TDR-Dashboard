@@ -4,6 +4,12 @@ from dash import html
 def create_sidebar():
     return html.Div(
         [
+            # Main Content
+
+            html.Link(
+                rel="stylesheet",
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css",
+            ),
             # Sidebar header with logo
             html.Div(
                 [

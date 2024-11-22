@@ -36,15 +36,16 @@ body {
 }
 
 .sidebar-menu {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
+
 .menu-item {
-  display: flex;
-  align-items: center;
   text-decoration: none;
   color: #555;
   padding: 10px;
+  display: flex;
+  align-items: center;
   font-size: 16px;
   transition: color 0.3s;
 }
@@ -64,31 +65,55 @@ body {
   color: #e9ca00;
 }
 
-.main-content {
-  margin: 0;
-  padding: 20px;
-  margin-left: 80px;
-}
-
+/* Header */
 .header-title {
   font-size: 24px;
   font-weight: bold;
-  margin: 0;
-  padding: 10px;
-  margin-left: 120px;
-  width: 100%;
-  height: 70px;
   background-color: #ffffff;
+  padding: 10px 20px;
   border-bottom: 1px solid #ddd;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
+  margin-left: 80px;
+  margin-bottom: 20px;
   z-index: 10;
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 
-/* Cards */
+/* Main container */
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  margin-left: 100px; /* Matches sidebar width */
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  padding: 20px;
+}
+
+/* Page-specific content */
+.page-content {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Cards and grid layout */
 .grid-row {
   display: flex;
   gap: 20px;
@@ -101,9 +126,9 @@ body {
   border-radius: 8px;
   padding: 15px;
   flex: 1;
-  height: 300px;
   display: flex;
   flex-direction: column;
+  height: 300px;
 }
 
 .card-header {
@@ -116,33 +141,57 @@ body {
 
 .card-content {
   flex: 1;
-  height: 100%; /* Ensure the chart fills the remaining space */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.container {
+/* Carousel */
+.carousel {
   width: 100%;
+  max-width: 800px;
   margin: 0 auto;
-  height: 100%;
-  padding-top: 10px;
 }
 
-.app-container {
-  display: flex;
-  height: 100vh;
-}
-
-.main-content {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0;
-}
-
-.page-content {
-  padding: 20px;
+.carousel img {
   width: 100%;
-  height: 100%;
+  border-radius: 8px;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
