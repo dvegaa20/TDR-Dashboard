@@ -23,7 +23,8 @@ from flask_cors import CORS
 
 app = dash.Dash(__name__)
 server = app.server
-CORS(server)
+CORS(server, resources={r"/*": {"origins": "https://tdr-dashboard.vercel.app/"}})
+
 
 app.layout = html.Div(
     [dcc.Location(id="url", refresh=False), html.Div(id="page-content")]
