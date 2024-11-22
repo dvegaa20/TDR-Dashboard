@@ -15,13 +15,13 @@ function Dashboard() {
               title="Estadísticas de Mantenimiento"
               linkText="See all"
               linkTo="/stats"
-              iframeSrc="http://localhost:8050/iris"
+              iframeSrc="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
             />
             <GraphContainer
-              title="Estado de Refacciones"
+              title="Estado de los Tractos"
               linkText="See all"
               linkTo="/tractos"
-              iframeSrc="http://localhost:8050/tractos_age"
+              iframeSrc="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
             />
           </div>
 
@@ -34,13 +34,13 @@ function Dashboard() {
               title="Actividades de Mantenimiento"
               linkText="See all"
               linkTo="/mantenimientos"
-              iframeSrc="http://localhost:8050/iris"
+              iframeSrc="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
             />
             <GraphContainer
               title="Resumen de Gastos"
               linkText="See all"
               linkTo="/gastos"
-              iframeSrc="http://localhost:8050/cost_distribution"
+              iframeSrc="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
             />
           </div>
 
@@ -51,11 +51,11 @@ function Dashboard() {
           >
             <GraphContainer
               title="Actividades de Mantenimiento"
-              iframeSrc="http://localhost:8050/iris"
+              iframeSrc="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
             />
             <GraphContainer
               title="Resumen de Gastos"
-              iframeSrc="http://localhost:8050/gapminder"
+              iframeSrc="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
             />
           </div>
         </div>

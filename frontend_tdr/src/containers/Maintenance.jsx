@@ -11,10 +11,10 @@ function Maintenance() {
             Estadísticas de Mantenimiento
           </h2>
           <Component
-            iframeSrc1="http://localhost:8050/tractos_age"
-            iframeSrc2="http://localhost:8050/tractos_age2"
-            iframeSrc3="http://localhost:8050/tractos_age3"
-            iframeSrc4="http://localhost:8050/tractos_age4"
+            iframeSrc1="https://tdr-dashboard.onrender.com/tractos_age"
+            iframeSrc2="https://tdr-dashboard.onrender.com/avg_repair_frecuency"
+            iframeSrc3="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
+            iframeSrc4="https://tdr-dashboard.onrender.com/mtbf"
           />
           <Table />
         </div>
