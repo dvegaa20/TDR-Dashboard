@@ -144,6 +144,67 @@ def cost_per_unit(data):
     )
 
 
+def vehicle_performance(data):
+    """
+    Generates a line chart showing the monthly mileage performance for each truck.
+
+    Args:
+    data: The data to generate the chart from. Must contain the columns "OpenedDate", "UnitNumber", and "Kilometers".
+
+    Returns:
+    A Dash HTML component containing the chart.
+    """
+    data["OpenedDate"] = pd.to_datetime(data["OpenedDate"])
+
+    data["Mes"] = data["OpenedDate"].dt.to_period("M").astype(str)
+
+    kilometraje_mensual = (
+        data.groupby(["UnitNumber", "Mes"])["Kilometers"]
+        .sum()
+        .reset_index()
+        .sort_values("Mes")
+    )
+
+    kilometraje_mensual["Kilometers"] = kilometraje_mensual["Kilometers"] / 1000
+
+    fig_kilometraje = px.line(
+        kilometraje_mensual,
+        x="Mes",
+        y="Kilometers",
+        color="UnitNumber",
+        title="Rendimiento de los Tractos por Kilometraje Mensual",
+        labels={
+            "Kilometers": "Kilómetros Recorridos",
+            "UnitNumber": "Tracto",
+        },
+        line_group="UnitNumber",
+    )
+
+    fig_kilometraje = standard_layout(fig_kilometraje)
+
+    fig_kilometraje.update_traces(
+        line=dict(width=2),
+        hovertemplate="Mes = %{x}<br>Kilómetros Recorridos = %{y:,} km",
+        marker=dict(opacity=0.8),
+    )
+    fig_kilometraje.update_layout(
+        xaxis=dict(type="category", title=None),
+        yaxis=dict(tickformat=","),
+        legend=dict(title="Tracto", orientation="h", y=-0.2),
+    )
+
+    return html.Div(
+        style=standard_style(height="88vh"),
+        children=[
+            dcc.Graph(
+                id="rendimiento-por-kilometraje",
+                figure=fig_kilometraje,
+                **standard_graph(),
+            )
+        ],
+    )
+
+
 def vehicle_age(data):
     """
     Generates a bar chart of the distribution of tractor units by age.

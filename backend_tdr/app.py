@@ -10,6 +10,7 @@ from data_containers.stats import (
 from data_containers.tractos import (
     unit_failure_distribution,
     cost_per_unit,
+    vehicle_performance,
     vehicle_age,
 )
 
@@ -34,7 +35,7 @@ app.layout = html.Div(
         dcc.Location(id="url", refresh=False),
         dcc.Loading(
             id="loading",
-            type="dot",  # Puedes cambiar el tipo de loader: "default", "circle", "dot"
+            type="cube",  # 'circle' | 'dot' | 'default' | 'cube'
             children=html.Div(id="page-content"),
             style={
                 "position": "fixed",
@@ -51,17 +52,21 @@ route_map = {
     "/failure_frequency": failure_frequency,
     "/avg_repair_frecuency": average_repair_frecuency,
     "/monthly_repair_distribution": monthly_failure_distribution,
-    "/mtbf": mtbf,
+    "/mtbf": mtbf,  # Falta revisar
     # Tractos
     "/tractos_failure_distribution": unit_failure_distribution,
     "/tractos_cost_distribution": cost_per_unit,
+    "/tractos_performance": vehicle_performance,
     "/tractos_age": vehicle_age,
+    ## Falta 1
     # Mantenimientos
+    ## Faltan 4
     # Gastos
-    "/cost_distribution": cost_distribution,
     "/calculate_maintenance_costs": maintenance_comparison_chart,
-    "/maintenance_costs": calculate_maintenance_costs,
+    "/cost_distribution": cost_distribution,
+    ## Faltan 2
     # Análisis Predictivo
+    ## Faltan lo que pienses pa esa
 }
 
 
