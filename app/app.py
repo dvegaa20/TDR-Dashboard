@@ -1,13 +1,47 @@
-from dash import Dash
-from layout.main import create_layout
+from dash import Dash, html, dcc, Input, Output
+import dash_bootstrap_components as dbc
+from components.sidebar import create_sidebar
+from components.header import create_header
+from pages.spendings import spendings_page
+from layout.main import dashboard
 
-# Initialize Dash app
-app = Dash(__name__, suppress_callback_exceptions=True)
-app.title = "Mantenimiento TDR"
+# Initialize the app
+app = Dash(
+    __name__,
+    external_stylesheets=[dbc.themes.BOOTSTRAP],
+    suppress_callback_exceptions=True,
+)
 
-# Set layout
-app.layout = create_layout()
+# Define the app layout
+app.layout = html.Div(
+    [
+        dcc.Location(id="url"),  
+        html.Div(
+            [
+                create_sidebar(),  # Sidebar
+                html.Div(
+                    [
+                        create_header(),  # Header
+                        html.Div(id="page-content"),  # Page content
+                    ],
+                    className="main-content",
+                ),
+            ],
+            className="app-container",
+        ),
+    ]
+)
 
-# Run app
+
+@app.callback(
+    Output("page-content", "children"),
+    [Input("url", "pathname")]
+)
+def display_page(pathname):
+    if pathname == "/spendings":
+        return spendings_page()
+    else:  # Default to home
+        return dashboard()
+
 if __name__ == "__main__":
     app.run_server(debug=True)

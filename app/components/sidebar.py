@@ -21,7 +21,7 @@ def create_sidebar():
                                 html.I(className="fas fa-home"),  # Add icon
                                 html.Span("Dashboard"),
                             ],
-                            href="#",
+                            href="/",
                             className="menu-item",
                         ),
                     ),
@@ -63,7 +63,7 @@ def create_sidebar():
                                 html.I(className="fas fa-dollar-sign"),
                                 html.Span("Gastos"),
                             ],
-                            href="#",
+                            href="/spendings",
                             className="menu-item",
                         ),
                     ),

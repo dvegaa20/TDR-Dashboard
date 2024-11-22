@@ -1,17 +1,16 @@
 from dash import html
-from layout.sidebar import create_sidebar
-from layout.header import create_header
-from layout.cards import create_card
+from components.sidebar import create_sidebar
+from components.header import create_header
+from components.card import create_card
 from graphs.spendings import cost_distribution
 from data import tdr_data
 
 
-def create_layout():
+def dashboard():
     return html.Div(
         [
             # Sidebar
             create_sidebar(),
-            create_header(),
 
             # Main Content
             html.Div(
