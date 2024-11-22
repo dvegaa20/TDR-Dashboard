@@ -8,9 +8,9 @@ from data_containers.stats import (
     mtbf,
 )
 from data_containers.tractos import (
-    vehicle_age,
     unit_failure_distribution,
     cost_per_unit,
+    vehicle_age,
 )
 
 # from data_containers.maintenance import maintenance_distribution
@@ -18,10 +18,12 @@ from data_containers.spendings import cost_distribution
 
 # from data_containers.predictive import predictive_layout
 from data import tdr_data
+from flask_cors import CORS
 
 
 app = dash.Dash(__name__)
 server = app.server
+CORS(server)
 
 app.layout = html.Div(
     [dcc.Location(id="url", refresh=False), html.Div(id="page-content")]

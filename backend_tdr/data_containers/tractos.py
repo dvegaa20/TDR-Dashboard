@@ -23,6 +23,16 @@ def standard_style(height="2000px", overflowY="scroll"):
 
 
 def unit_failure_distribution(data):
+    """
+    Generates a bar chart of the distribution of failures per vehicle unit.
+
+    Args:
+    data: The data to generate the chart from. Must contain the columns "UnitNumber" and "JobCode".
+
+    Returns:
+    A Dash HTML component containing the chart.
+    """
+
     failures_per_vehicle = (
         data.groupby("UnitNumber")["JobCode"]
         .count()
@@ -36,10 +46,6 @@ def unit_failure_distribution(data):
         x="UnitNumber",  # Mostrar solo los UnitNumbers existentes
         y="CantidadFallas",
         title="Distribución de Fallas por Tracto",
-        labels={
-            "UnitNumber": "Tracto (Unidad)",
-            "CantidadFallas": "Cantidad de Fallas",
-        },
         text="CantidadFallas",
     )
 
@@ -48,7 +54,7 @@ def unit_failure_distribution(data):
 
     # Personalizar estilo
     fig_failures_per_vehicle.update_traces(
-        hovertemplate="Tracto (Unidad) = %{x}<br>Cantidad de Fallas = $%{y}",
+        hovertemplate="Tracto (Unidad) = %{x}<br>Cantidad de Fallas = %{y}",
         marker=dict(
             color="indianred", opacity=0.8, line=dict(color="black", width=1.5)
         ),
@@ -77,6 +83,15 @@ def unit_failure_distribution(data):
 
 
 def cost_per_unit(data):
+    """
+    Generates a bar chart of the total cost per vehicle.
+
+    Args:
+    data: The data to generate the chart from. Must contain the columns "UnitNumber" and "TotalAmount".
+
+    Returns:
+    A Dash HTML component containing the chart.
+    """
     cost_per_unit = (
         data.groupby("UnitNumber")["TotalAmount"]
         .sum()
@@ -90,10 +105,6 @@ def cost_per_unit(data):
         x="UnitNumber",
         y="CostoTotal",
         title="Costo Total por Tracto",
-        labels={
-            "UnitNumber": "Tracto (Unidad)",
-            "CostoTotal": "Costo Total",
-        },
         text="CostoTotal",
     )
 
@@ -128,6 +139,16 @@ def cost_per_unit(data):
 
 
 def vehicle_age(data):
+    """
+    Generates a bar chart of the distribution of tractor units by age.
+
+    Args:
+    data: The data to generate the chart from. Must contain the columns "UnitNumber" and "UnitYear".
+
+    Returns:
+    A Dash HTML component containing the chart.
+    """
+
     current_year = pd.to_datetime("today").year
     data["VehicleAge"] = current_year - data["UnitYear"]
 
@@ -143,17 +164,13 @@ def vehicle_age(data):
         x="VehicleAge",
         y="CantidadTractos",
         title="Distribución de Tractos por Antigüedad",
-        labels={
-            "UnitNumber": "Tracto (Unidad)",
-            "VehicleAge": "Años de Antigüedad",
-            "CantidadTractos": "Cantidad de Tractos",
-        },
         text="CantidadTractos",
     )
 
     fig_vehicle_age = standard_layout(fig_vehicle_age)
 
     fig_vehicle_age.update_traces(
+        hovertemplate="Años de Antigüedad = %{x}<br>Cantidad de Tractos = %{y}",
         marker=dict(
             color="royalblue", opacity=0.8, line=dict(color="black", width=1.5)
         ),
