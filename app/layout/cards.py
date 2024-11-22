@@ -1,11 +1,19 @@
 from dash import html, dcc
 
 
-def create_card(title, graph_id):
+def create_card(title, content=None):
     return html.Div(
         [
-            html.Div(title, className="card-header"),
-            dcc.Graph(id=graph_id, className="card-content"),
+            # Card Header
+            html.Div(
+                title,
+                className="card-header",
+            ),
+            # Card Content
+            html.Div(
+                content,
+                className="card-content",
+            ),
         ],
         className="card",
     )

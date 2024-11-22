@@ -2,6 +2,8 @@ from dash import html
 from layout.sidebar import create_sidebar
 from layout.header import create_header
 from layout.cards import create_card
+from graphs.spendings import cost_distribution
+from data import tdr_data
 
 
 def create_layout():
@@ -37,10 +39,13 @@ def create_layout():
                             # Row 2
                             create_card(
                                 "Actividades de Mantenimiento (Semanales/Mensuales)",
-                                "maintenance-activities",
+                                "Content for maintenance activities",
                             ),
-                            create_card("Resumen de Gastos",
-                                        "expenses-summary"),
+                            create_card(
+                                "Resumen de Gastos",
+                                # Add the graph as the content
+                                cost_distribution(tdr_data),
+                            ),
                         ],
                         className="grid-row",
                     ),

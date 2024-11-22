@@ -7,9 +7,8 @@ def create_sidebar():
             # Sidebar header with logo
             html.Div(
                 [
-                    html.Img(src="/assets/logo.png",
+                    html.Img(src="/assets/tdr_logo.png",
                              alt="Logo", className="logo"),
-                    html.Span("TDR MOVIMIENTO"),
                 ],
                 className="sidebar-header",
             ),
