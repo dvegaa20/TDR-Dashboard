@@ -22,6 +22,14 @@ def standard_style(height="2000px", overflowY="scroll"):
     }
 
 
+def standard_graph():
+    return {
+        "config": {"displayModeBar": False},
+        "style": {"height": "100%", "width": "97vw"},
+        "loading_state": {"is_loading": False},
+    }
+
+
 def unit_failure_distribution(data):
     """
     Generates a bar chart of the distribution of failures per vehicle unit.
@@ -75,8 +83,7 @@ def unit_failure_distribution(data):
             dcc.Graph(
                 id="distribucion-fallas-vehiculo",
                 figure=fig_failures_per_vehicle,
-                config={"displayModeBar": False},
-                style={"height": "100%", "width": "97vw"},
+                **standard_graph(),
             )
         ],
     )
@@ -131,8 +138,7 @@ def cost_per_unit(data):
             dcc.Graph(
                 id="costo-total-vehiculo",
                 figure=fig_cost_per_unit,
-                config={"displayModeBar": False},
-                style={"height": "100%", "width": "97vw"},
+                **standard_graph(),
             )
         ],
     )
@@ -182,8 +188,7 @@ def vehicle_age(data):
             dcc.Graph(
                 id="distribucion-fallas-mes",
                 figure=fig_vehicle_age,
-                config={"displayModeBar": False},
-                style={"height": "100%", "width": "97vw"},
+                **standard_graph(),
             )
         ],
     )

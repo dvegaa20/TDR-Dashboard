@@ -14,7 +14,11 @@ from data_containers.tractos import (
 )
 
 # from data_containers.maintenance import maintenance_distribution
-from data_containers.spendings import cost_distribution, maintenance_comparison_chart
+from data_containers.spendings import (
+    cost_distribution,
+    maintenance_comparison_chart,
+    calculate_maintenance_costs,
+)
 
 # from data_containers.predictive import predictive_layout
 from data import tdr_data
@@ -56,6 +60,7 @@ route_map = {
     # Gastos
     "/cost_distribution": cost_distribution,
     "/calculate_maintenance_costs": maintenance_comparison_chart,
+    "/maintenance_costs": calculate_maintenance_costs,
     # Análisis Predictivo
 }
 

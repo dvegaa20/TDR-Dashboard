@@ -22,6 +22,14 @@ def standard_style(height="2000px"):
     }
 
 
+def standard_graph():
+    return {
+        "config": {"displayModeBar": False},
+        "style": {"height": "100%", "width": "97vw"},
+        "loading_state": {"is_loading": False},
+    }
+
+
 def failure_frequency(data):
     """
     Generates a bar chart of the failure frequency by component.
@@ -64,8 +72,7 @@ def failure_frequency(data):
             dcc.Graph(
                 id="fallas-por-componente",
                 figure=fig_fallas,
-                config={"displayModeBar": False},
-                style={"height": "100%", "width": "97vw"},
+                **standard_graph(),
             )
         ],
     )
@@ -120,8 +127,7 @@ def average_repair_frecuency(data):
             dcc.Graph(
                 id="promedio-tiempos-reparacion",
                 figure=fig_tiempos,
-                config={"displayModeBar": False},
-                style={"height": "100%", "width": "97vw"},
+                **standard_graph(),
             )
         ],
     )
@@ -192,8 +198,7 @@ def monthly_failure_distribution(data):
             dcc.Graph(
                 id="distribucion-fallas-mes",
                 figure=fig_fallas_mes,
-                config={"displayModeBar": False},
-                style={"height": "100%", "width": "97vw"},
+                **standard_graph(),
             )
         ],
     )
@@ -253,8 +258,7 @@ def mtbf(data):
             dcc.Graph(
                 id="mtbf-graph",
                 figure=fig_mtbf,
-                config={"displayModeBar": False},
-                style={"height": "100%", "width": "97vw"},
+                **standard_graph(),
             )
         ],
     )

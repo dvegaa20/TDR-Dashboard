@@ -23,156 +23,172 @@ def standard_style(height="2000px"):
     }
 
 
+def standard_graph():
+    return {
+        "config": {"displayModeBar": False},
+        "style": {"height": "100%", "width": "97vw"},
+        "loading_state": {"is_loading": False},
+    }
+
+
 def cost_distribution(data):
+    """
+    Generates a pie chart of the cost distribution by job code.
+
+    Args:
+    data: The data to generate the chart from. Must contain the columns "TotalAmount" and "JobCode".
+
+    Returns:
+    A Dash HTML component containing the chart.
+    """
+
     data = data.copy()
-    # Elimina los primeros 9 caracteres (Codigo)
     data["JobCode"] = data["JobCode"].str[9:]
 
-    # Genera el gráfico de pastel
     fig_cost_distribution = px.pie(
         data,
         values="TotalAmount",
         names="JobCode",
         color="JobCode",
+        title="Distribución de Gastos por Motivo de Reparación",
     )
 
-    # Configuración de las trazas
     fig_cost_distribution.update_traces(
         textposition="inside",
         textinfo="percent+label",
         insidetextorientation="radial",
-        hoverinfo="label+percent+value",  # Muestra porcentaje y valor absoluto
-
-        # Plantilla personalizada para el hover
+        hoverinfo="label+percent+value",
         hovertemplate="<b>%{label}</b><br>Porcentaje: %{percent}<br>Total: $%{value}<extra></extra>",
     )
 
-    # Configuración de diseño
+    fig_cost_distribution = standard_layout(fig_cost_distribution)
     fig_cost_distribution.update_layout(
-        margin=dict(l=0, r=0, t=0, b=0),
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-        title="Distribución de Gastos por Motivo de Reparación",
-        title_x=0.5,
-        uniformtext_minsize=12,
         uniformtext_mode="hide",
     )
 
-    # Devuelve el Div con el gráfico
     return html.Div(
-        [
+        style=standard_style(height="90vh"),
+        children=[
             dcc.Graph(
                 id="cost-distribution-graph",
                 figure=fig_cost_distribution,
-
                 config={"displayModeBar": False},
-
                 style={"height": "100%", "width": "100%"},
             )
         ],
-        style={"height": "89vh", "width": "97vw"},  # Ajuste del tamaño del Div
     )
 
 
-def calculate_maintenance_costs(df):
-    # Convert 'OpenedDate' to datetime and extract the year
-    df['Year'] = pd.to_datetime(
-        df['OpenedDate']).dt.year
+def calculate_maintenance_costs(data):
+    """
+    Generates a bar chart of maintenance costs and job quantities by year.
 
-    # Filter for PM, Correctivo, and Auxilio Carretero based on 'JobCode'
-    pm_jobs = df[df['JobCode'].str.contains(
-        'preventivo', case=False, na=False)]
-    correctivo_jobs = df[df['JobCode'].str.contains(
-        'CORRECTIVO', case=False, na=False)]
-    auxilio_jobs = df[df['JobCode'].str.contains(
-        'AUXILIO CARRETERO', case=False, na=False)]
+    Args:
+    data: A DataFrame containing maintenance data. Must include the columns "OpenedDate", "JobCode", "OrderID", and "TotalAmount".
 
-    # Group by year and calculate stats
+    Returns:
+    A Dash HTML component containing the chart.
+    """
+
+    data["Year"] = pd.to_datetime(data["OpenedDate"]).dt.year
+
+    pm_jobs = data[data["JobCode"].str.contains("preventivo", case=False, na=False)]
+    correctivo_jobs = data[
+        data["JobCode"].str.contains("CORRECTIVO", case=False, na=False)
+    ]
+    auxilio_jobs = data[
+        data["JobCode"].str.contains("AUXILIO CARRETERO", case=False, na=False)
+    ]
+
     stats = (
-        df.groupby('Year')
-        .apply(lambda group: {
-            'PM_Quantity': pm_jobs[pm_jobs['Year'] == group.name]['OrderID'].nunique(),
-            'Correctivo_Quantity': correctivo_jobs[correctivo_jobs['Year'] == group.name]['OrderID'].nunique(),
-            'Auxilio_Quantity': auxilio_jobs[auxilio_jobs['Year'] == group.name]['OrderID'].nunique(),
-            'PM_Cost': pm_jobs[pm_jobs['Year'] == group.name]['TotalAmount'].sum().round(2),
-            'Correctivo_Cost': correctivo_jobs[correctivo_jobs['Year'] == group.name]['TotalAmount'].sum(),
-            'Auxilio_Cost': auxilio_jobs[auxilio_jobs['Year'] == group.name]['TotalAmount'].sum()
-        })
+        data.groupby("Year")
+        .apply(
+            lambda group: {
+                "PM_Quantity": pm_jobs[pm_jobs["Year"] == group.name][
+                    "OrderID"
+                ].nunique(),
+                "Correctivo_Quantity": correctivo_jobs[
+                    correctivo_jobs["Year"] == group.name
+                ]["OrderID"].nunique(),
+                "Auxilio_Quantity": auxilio_jobs[auxilio_jobs["Year"] == group.name][
+                    "OrderID"
+                ].nunique(),
+                "PM_Cost": pm_jobs[pm_jobs["Year"] == group.name]["TotalAmount"]
+                .sum()
+                .round(2),
+                "Correctivo_Cost": correctivo_jobs[
+                    correctivo_jobs["Year"] == group.name
+                ]["TotalAmount"].sum(),
+                "Auxilio_Cost": auxilio_jobs[auxilio_jobs["Year"] == group.name][
+                    "TotalAmount"
+                ].sum(),
+            }
+        )
         .to_list()
     )
 
-    # Convert stats to a DataFrame
-    return pd.DataFrame(stats, index=df['Year'].unique()).reset_index(names='Year')
-
-
-def maintenance_comparison_chart(df):
-    # Calculate maintenance stats
-    stats_df = calculate_maintenance_costs(df)
-
-    # Create grouped bar chart using Plotly
-    fig = go.Figure()
-
-    # Add bars for PM, Correctivo, and Auxilio Carretero costs
-    fig.add_trace(
-        go.Bar(
-            x=stats_df['Year'],
-            y=stats_df['PM_Cost'],
-            name='PM',
-            marker_color='lightblue',
-            text=stats_df['PM_Cost'],
-            textposition='outside',
-            hovertemplate="<b>Año:</b> %{x}<br><b>Costo PM:</b> $%{y:.2f}<br><b>Órdenes:</b> %{text}<extra></extra>"
-        )
+    stats_data = pd.DataFrame(stats, index=data["Year"].unique()).reset_index(
+        names="Year"
     )
 
-    fig.add_trace(
-        go.Bar(
-            x=stats_df['Year'],
-            y=stats_df['Correctivo_Cost'],
-            name='Correctivo',
-            marker_color='lightgreen',
-            text=stats_df['Correctivo_Cost'],
-            textposition='outside',
-            hovertemplate="<b>Año:</b> %{x}<br><b>Costo Correctivo:</b> $%{y:.2f}<br><b>Órdenes:</b> %{text}<extra></extra>"
-        )
+    return stats_data, html.Div(
+        style=standard_style(height="90vh"),
+        children=[
+            dcc.Graph(
+                id="maintenance-costs-graph",
+                figure=stats_data,
+                **standard_graph(),
+            )
+        ],
     )
 
-    fig.add_trace(
-        go.Bar(
-            x=stats_df['Year'],
-            y=stats_df['Auxilio_Cost'],
-            name='Auxilio Carretero',
-            marker_color='lightcoral',
-            text=stats_df['Auxilio_Cost'],
-            textposition='outside',
-            hovertemplate="<b>Año:</b> %{x}<br><b>Costo Auxilio:</b> $%{y:.2f}<br><b>Órdenes:</b> %{text}<extra></extra>"
-        )
+
+def maintenance_comparison_chart(data):
+    stats_data, _ = calculate_maintenance_costs(data)
+
+    df = pd.DataFrame(
+        {
+            "Year": stats_data["Year"],
+            "PM_Cost": stats_data["PM_Cost"],
+            "Correctivo_Cost": stats_data["Correctivo_Cost"],
+            "Auxilio_Cost": stats_data["Auxilio_Cost"],
+        }
     )
 
-    # Configure layout
-    fig.update_layout(
-        title="Comparación de Costos de Mantenimiento (PM, Correctivo, Auxilio Carretero)",
-        xaxis_title="Año",
-        yaxis_title="Costo Total ($)",
+    df_melted = df.melt(
+        id_vars=["Year"],
+        value_vars=["PM_Cost", "Correctivo_Cost", "Auxilio_Cost"],
+        var_name="Tipo de Mantenimiento",
+        value_name="Costo Total ($)",
+    )
+
+    fig_cost_comparison = px.bar(
+        df_melted,
+        x="Year",
+        y="Costo Total ($)",
+        color="Tipo de Mantenimiento",
         barmode="group",
-        bargap=0.15,
-        bargroupgap=0.1,
-        legend_title="Tipo de Mantenimiento",
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)"
+        title="Comparación de Costos de Mantenimiento (PM, Correctivo, Auxilio Carretero)",
+        labels={
+            "Year": "Año",
+            "Costo Total ($)": "Costo Total ($)",
+            "Tipo de Mantenimiento": "Tipo de Mantenimiento",
+        },
     )
 
-    # Return the chart wrapped in a Dash Div
+    fig_cost_comparison = standard_layout(fig_cost_comparison)
+
+    fig_cost_comparison.update_layout(
+        legend_title="Tipo de Mantenimiento", xaxis=dict(tickmode="linear")
+    )
+
     return html.Div(
-        style=standard_style(
-            height="120vh"
-        ),
+        style=standard_style(height="90vh"),
         children=[
             dcc.Graph(
                 id="maintenance-comparison-chart",
-                figure=fig,
-                config={"displayModeBar": False},
-                style={"height": "150vh", "width": "97vw"}
+                figure=fig_cost_comparison,
+                **standard_graph(),
             )
-        ]
+        ],
     )
