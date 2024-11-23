@@ -145,7 +145,7 @@ def maintenance_comparison_chart(data, simplified=False):
         )
 
     return html.Div(
-        style=standard_style(height="90vh"),
+        style=standard_style(height="89vh"),
         children=[
             dcc.Graph(
                 id="maintenance-comparison-chart",
