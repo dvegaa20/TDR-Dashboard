@@ -3,7 +3,9 @@ import dash_bootstrap_components as dbc
 from components.sidebar import create_sidebar
 from components.header import create_header
 from pages.spendings import spendings_page
-from layout.main import dashboard
+from layout.dashboard import dashboard
+
+from data import tdr_data
 
 # Initialize the app
 app = Dash(
@@ -15,7 +17,7 @@ app = Dash(
 # Define the app layout
 app.layout = html.Div(
     [
-        dcc.Location(id="url"),  
+        dcc.Location(id="url"),
         html.Div(
             [
                 create_sidebar(),  # Sidebar
@@ -42,6 +44,7 @@ def display_page(pathname):
         return spendings_page()
     else:  # Default to home
         return dashboard()
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)

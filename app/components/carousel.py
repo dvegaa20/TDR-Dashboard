@@ -1,18 +1,37 @@
-import dash_bootstrap_components as dbc
 from dash import html
 
-def create_carousel(images):
+
+def create_carousel(graphs):
     """
-    Create a reusable carousel component.
-    
-    :param images: List of dictionaries with 'src' and 'alt' keys for images.
-    :return: A dbc.Carousel component.
+    Create a carousel containing only graphs.
     """
-    return dbc.Carousel(
-        items=[{"key": idx, "src": img["src"], "alt": img["alt"]} for idx, img in enumerate(images)],
-        controls=True,
-        indicators=True,
-        interval=3000,
-        ride="carousel",
-        style={"margin-bottom": "20px"},  # Add spacing below the carousel
+    carousel_items = []
+    for idx, graph in enumerate(graphs):
+        # Add each graph as a carousel item
+        carousel_items.append(
+            html.Div(
+                graph["content"],
+                className="carousel-item" + (" active" if idx == 0 else "")
+            )
+        )
+
+    return html.Div(
+        [
+            html.Div(
+                className="carousel-inner",
+                children=carousel_items,
+            ),
+            # Navigation controls
+            html.A(
+                "❮", className="carousel-control-prev", href="#graphCarousel", role="button",
+                style={"color": "black"}, **{"data-slide": "prev"}
+            ),
+            html.A(
+                "❯", className="carousel-control-next", href="#graphCarousel", role="button",
+                style={"color": "black"}, **{"data-slide": "next"}
+            ),
+        ],
+        className="carousel slide",
+        id="graphCarousel",
+        **{"data-ride": "carousel"}
     )

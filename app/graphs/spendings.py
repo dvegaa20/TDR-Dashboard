@@ -161,7 +161,7 @@ def maintenance_comparison_chart(df):
                 id="maintenance-comparison-chart",
                 figure=fig,
                 config={"displayModeBar": False},
-                style={"height": "150vh", "width": "97vw"}
+                style={"height": "100%", "width": "100%"}
             )
         ]
     )

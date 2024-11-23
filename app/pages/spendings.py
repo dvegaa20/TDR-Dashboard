@@ -3,6 +3,8 @@ from components.carousel import create_carousel
 from components.table import create_table
 import pandas as pd
 
+from data import tdr_data
+
 
 def spendings_page():
     """
@@ -22,11 +24,15 @@ def spendings_page():
         {"src": "/assets/image3.jpg", "alt": "Cost Analysis 3"},
     ]
 
+    # only show jobcode and unit number
+
+    data = tdr_data.copy()
+    data_filtered = data[["JobCode", "UnitNumber"]]
+
     return html.Div(
         [
-            create_carousel(carousel_images),
             html.Div(
-                create_table(data),
+                create_table(data_filtered),
                 className="page-content",  # Matches unified styling
             ),
         ],
