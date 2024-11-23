@@ -5,22 +5,26 @@ from data_containers.stats import (
     failure_frequency,
     average_repair_frecuency,
     monthly_failure_distribution,
+    get_stats_data,
 )
 from data_containers.tractos import (
     unit_failure_distribution,
     cost_per_unit,
     vehicle_performance,
     vehicle_age,
+    get_tractos_data,
 )
 
 from data_containers.maintenance import (
     frecuencia_actividades_mantenimiento,
     actividades_por_parte,
     duracion_promedio_por_tipo,
+    get_maintenance_data,
 )
 from data_containers.spendings import (
     cost_distribution,
     maintenance_comparison_chart,
+    get_spendings_data,
 )
 
 # from data_containers.predictive import predictive_layout
@@ -49,6 +53,7 @@ app.layout = html.Div(
     ]
 )
 
+# Routes
 route_map = {
     # Dashboard
     "/dash_monthly_repair_distribution": lambda data: monthly_failure_distribution(
@@ -80,6 +85,27 @@ route_map = {
     # Análisis Predictivo
     ## Faltan lo que pienses pa esa
 }
+
+
+# API Endpoints
+@app.server.route("/api/data/stats", methods=["GET"])
+def api_stats_data():
+    return get_stats_data(tdr_data)
+
+
+@app.server.route("/api/data/tractos", methods=["GET"])
+def api_tractos_data():
+    return get_tractos_data(tdr_data)
+
+
+@app.server.route("/api/data/spendings", methods=["GET"])
+def api_spendings_data():
+    return get_spendings_data(tdr_data)
+
+
+@app.server.route("/api/data/maintenance", methods=["GET"])
+def api_maintenance_data():
+    return get_maintenance_data(tdr_data)
 
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])

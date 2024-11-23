@@ -1,4 +1,5 @@
 from dash import dcc, html
+from flask import jsonify
 import plotly.express as px
 import pandas as pd
 
@@ -206,3 +207,16 @@ def duracion_promedio_por_tipo(data):
             )
         ],
     )
+
+
+def get_maintenance_data(data):
+    columns = [
+        "PartNumber",
+        "RepairReason",
+        "JobCode",
+        "OpenedDate",
+        "ClosedDate",
+    ]
+    filtered_data = data[columns]
+
+    return jsonify(filtered_data.to_dict(orient="records"))

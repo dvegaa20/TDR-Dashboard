@@ -1,7 +1,7 @@
-import plotly.graph_objects as go
-import pandas as pd
 from dash import dcc, html
+from flask import jsonify
 import plotly.express as px
+import pandas as pd
 
 
 def standard_layout(fig):
@@ -202,3 +202,15 @@ def cost_distribution(data):
             )
         ],
     )
+
+
+def get_spendings_data(data):
+    columns = [
+        "JobCode",
+        "TotalAmount",
+        "PartNumber",
+        "RepairReason",
+    ]
+    filtered_data = data[columns]
+
+    return jsonify(filtered_data.to_dict(orient="records"))

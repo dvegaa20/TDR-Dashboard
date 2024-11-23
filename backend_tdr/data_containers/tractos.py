@@ -1,4 +1,5 @@
 from dash import dcc, html
+from flask import jsonify
 import plotly.express as px
 import pandas as pd
 
@@ -257,3 +258,15 @@ def vehicle_age(data):
             )
         ],
     )
+
+
+def get_tractos_data(data):
+    columns = [
+        "UnitNumber",
+        "JobCode",
+        "TotalAmount",
+        "Kilometers",
+    ]
+    filtered_data = data[columns]
+
+    return jsonify(filtered_data.to_dict(orient="records"))
