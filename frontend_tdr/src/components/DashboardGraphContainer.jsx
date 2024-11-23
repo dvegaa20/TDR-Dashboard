@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const DashboardGraphContainer = ({ title, linkText, linkTo, iframeSrc }) => {
+const DashboardGraphContainer = ({ title, linkTo, iframeSrc }) => {
   return (
     <div className="flex flex-col">
       <div className="flex justify-between items-center mb-2">
@@ -9,7 +9,7 @@ const DashboardGraphContainer = ({ title, linkText, linkTo, iframeSrc }) => {
         {linkTo && (
           <Link to={linkTo}>
             <p className="text-sm text-customBlue cursor-pointer hover:text-blue-900 hover:underline hover:decoration-dashed">
-              {linkText}
+              Ver Detalle
             </p>
           </Link>
         )}

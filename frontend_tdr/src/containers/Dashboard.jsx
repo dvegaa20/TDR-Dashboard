@@ -13,13 +13,11 @@ function Dashboard() {
           >
             <GraphContainer
               title="Estadísticas de Mantenimiento"
-              linkText="Detalle"
               linkTo="/stats"
               iframeSrc="http://127.0.0.1:8050/dash_monthly_repair_distribution"
             />
             <GraphContainer
               title="Estado de los Tractos"
-              linkText="Detalle"
               linkTo="/tractos"
               iframeSrc="http://127.0.0.1:8050/dash_tractos_failure_distribution"
             />
@@ -28,33 +26,28 @@ function Dashboard() {
           {/* Second grid with 2.5fr and 1.5fr columns */}
           <div
             className="grid mt-8"
-            style={{ gridTemplateColumns: "2.5fr 1.5fr", gap: "1rem" }}
+            style={{ gridTemplateColumns: "1.5fr 2.5fr", gap: "1rem" }}
           >
             <GraphContainer
-              title="Actividades de Mantenimiento"
-              linkText="Detalle"
-              linkTo="/mantenimientos"
-              iframeSrc="http://127.0.0.1:8050/dash_maintenance_activities"
-            />
-            <GraphContainer
               title="Resumen de Gastos"
-              linkText="Detalle"
               linkTo="/gastos"
               iframeSrc="http://127.0.0.1:8050/dash_cost_distribution"
+            />
+            <GraphContainer
+              title="Actividades de Mantenimiento"
+              linkTo="/mantenimientos"
+              iframeSrc="http://127.0.0.1:8050/dash_part_number"
             />
           </div>
 
           {/* Third grid with 1.5fr 2.5fr column */}
           <div
             className="grid mt-8"
-            style={{ gridTemplateColumns: "1.5fr 2.5fr", gap: "1rem" }}
+            style={{ gridTemplateColumns: "1fr", gap: "1rem" }}
           >
             <GraphContainer
-              title="Actividades de Mantenimiento"
-              iframeSrc="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
-            />
-            <GraphContainer
-              title="Resumen de Gastos"
+              title="Análisis Predictivo"
+              linkTo="/predictive"
               iframeSrc="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
             />
           </div>
