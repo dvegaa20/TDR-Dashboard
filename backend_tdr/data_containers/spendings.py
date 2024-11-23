@@ -31,54 +31,6 @@ def standard_graph():
     }
 
 
-def cost_distribution(data):
-    """
-    Generates a pie chart of the cost distribution by job code.
-
-    Args:
-    data: The data to generate the chart from. Must contain the columns "TotalAmount" and "JobCode".
-
-    Returns:
-    A Dash HTML component containing the chart.
-    """
-
-    data = data.copy()
-    data["JobCode"] = data["JobCode"].str[9:]
-
-    fig_cost_distribution = px.pie(
-        data,
-        values="TotalAmount",
-        names="JobCode",
-        color="JobCode",
-        title="Distribución de Gastos por Motivo de Reparación",
-    )
-
-    fig_cost_distribution.update_traces(
-        textposition="inside",
-        textinfo="percent+label",
-        insidetextorientation="radial",
-        hoverinfo="label+percent+value",
-        hovertemplate="<b>%{label}</b><br>Porcentaje: %{percent}<br>Total: $%{value}<extra></extra>",
-    )
-
-    fig_cost_distribution = standard_layout(fig_cost_distribution)
-    fig_cost_distribution.update_layout(
-        uniformtext_mode="hide",
-    )
-
-    return html.Div(
-        style=standard_style(height="90vh"),
-        children=[
-            dcc.Graph(
-                id="cost-distribution-graph",
-                figure=fig_cost_distribution,
-                config={"displayModeBar": False},
-                style={"height": "100%", "width": "100%"},
-            )
-        ],
-    )
-
-
 def calculate_maintenance_costs(data):
     """
     Generates a bar chart of maintenance costs and job quantities by year.
@@ -143,7 +95,7 @@ def calculate_maintenance_costs(data):
     )
 
 
-def maintenance_comparison_chart(data):
+def maintenance_comparison_chart(data, simplified=False):
     stats_data, _ = calculate_maintenance_costs(data)
 
     df = pd.DataFrame(
@@ -182,6 +134,14 @@ def maintenance_comparison_chart(data):
         legend_title="Tipo de Mantenimiento", xaxis=dict(tickmode="linear")
     )
 
+    if simplified:
+        fig_cost_comparison.update_layout(
+            xaxis_title=None,
+            yaxis_title=None,
+            margin=dict(t=30, l=0, r=40, b=0),
+            showlegend=False,
+        )
+
     return html.Div(
         style=standard_style(height="90vh"),
         children=[
@@ -189,6 +149,54 @@ def maintenance_comparison_chart(data):
                 id="maintenance-comparison-chart",
                 figure=fig_cost_comparison,
                 **standard_graph(),
+            )
+        ],
+    )
+
+
+def cost_distribution(data):
+    """
+    Generates a pie chart of the cost distribution by job code.
+
+    Args:
+    data: The data to generate the chart from. Must contain the columns "TotalAmount" and "JobCode".
+
+    Returns:
+    A Dash HTML component containing the chart.
+    """
+
+    data = data.copy()
+    data["JobCode"] = data["JobCode"].str[9:]
+
+    fig_cost_distribution = px.pie(
+        data,
+        values="TotalAmount",
+        names="JobCode",
+        color="JobCode",
+        title="Distribución de Gastos por Motivo de Reparación",
+    )
+
+    fig_cost_distribution.update_traces(
+        textposition="inside",
+        textinfo="percent+label",
+        insidetextorientation="radial",
+        hoverinfo="label+percent+value",
+        hovertemplate="<b>%{label}</b><br>Porcentaje: %{percent}<br>Total: $%{value}<extra></extra>",
+    )
+
+    fig_cost_distribution = standard_layout(fig_cost_distribution)
+    fig_cost_distribution.update_layout(
+        uniformtext_mode="hide",
+    )
+
+    return html.Div(
+        style=standard_style(height="90vh"),
+        children=[
+            dcc.Graph(
+                id="cost-distribution-graph",
+                figure=fig_cost_distribution,
+                config={"displayModeBar": False},
+                style={"height": "100%", "width": "100%"},
             )
         ],
     )

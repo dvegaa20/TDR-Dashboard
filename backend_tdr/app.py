@@ -14,7 +14,11 @@ from data_containers.tractos import (
     vehicle_age,
 )
 
-# from data_containers.maintenance import maintenance_distribution
+from data_containers.maintenance import (
+    frecuencia_actividades_mantenimiento,
+    actividades_por_parte,
+    duracion_promedio_por_tipo,
+)
 from data_containers.spendings import (
     cost_distribution,
     maintenance_comparison_chart,
@@ -48,6 +52,19 @@ app.layout = html.Div(
 )
 
 route_map = {
+    # Dashboard
+    "/dash_monthly_repair_distribution": lambda data: monthly_failure_distribution(
+        data, simplified=True
+    ),
+    "/dash_tractos_failure_distribution": lambda data: unit_failure_distribution(
+        data, simplified=True
+    ),
+    "/dash_maintenance_activities": lambda data: frecuencia_actividades_mantenimiento(
+        data, simplified=True
+    ),
+    "/dash_cost_distribution": lambda data: maintenance_comparison_chart(
+        data, simplified=True
+    ),
     # Stats
     "/failure_frequency": failure_frequency,
     "/avg_repair_frecuency": average_repair_frecuency,
@@ -56,13 +73,15 @@ route_map = {
     # Tractos
     "/tractos_failure_distribution": unit_failure_distribution,
     "/tractos_cost_distribution": cost_per_unit,
-    "/tractos_performance": vehicle_performance,
+    "/tractos_performance": vehicle_performance,  # Falta revisar
     "/tractos_age": vehicle_age,
-    ## Falta 1
     # Mantenimientos
+    "/maintenance_activities": frecuencia_actividades_mantenimiento,
+    "/part_number": actividades_por_parte,
+    "/time_to_complete": duracion_promedio_por_tipo,
     ## Faltan 4
     # Gastos
-    "/calculate_maintenance_costs": maintenance_comparison_chart,
+    "/maintenance_costs": maintenance_comparison_chart,
     "/cost_distribution": cost_distribution,
     ## Faltan 2
     # Análisis Predictivo

@@ -133,20 +133,21 @@ def average_repair_frecuency(data):
     )
 
 
-def monthly_failure_distribution(data):
+def monthly_failure_distribution(data, simplified=False):
     """
     Generates a bar chart of the distribution of failures by month.
 
     Args:
     data: The data to generate the chart from. Must contain the columns "JobCode" and "OpenedDate".
+    simplified (bool): If True, the chart will omit axis labels for use in a dashboard.
 
     Returns:
     A Dash HTML component containing the chart.
     """
 
     data["OpenedDate"] = pd.to_datetime(data["OpenedDate"])
-
     data["Mes"] = data["OpenedDate"].dt.month
+
     fallas_por_mes = (
         data.groupby("Mes")["JobCode"]
         .count()
@@ -184,6 +185,13 @@ def monthly_failure_distribution(data):
     )
 
     fig_fallas_mes = standard_layout(fig_fallas_mes)
+
+    if simplified:
+        fig_fallas_mes.update_layout(
+            xaxis_title=None,
+            yaxis_title=None,
+            margin=dict(t=30, l=0, r=40, b=0),
+        )
 
     fig_fallas_mes.update_traces(
         marker=dict(

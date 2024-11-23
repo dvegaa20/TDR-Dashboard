@@ -30,12 +30,13 @@ def standard_graph():
     }
 
 
-def unit_failure_distribution(data):
+def unit_failure_distribution(data, simplified=False):
     """
     Generates a bar chart of the distribution of failures per vehicle unit.
 
     Args:
     data: The data to generate the chart from. Must contain the columns "UnitNumber" and "JobCode".
+    simplified (bool): If True, the chart will omit axis labels for use in a dashboard.
 
     Returns:
     A Dash HTML component containing the chart.
@@ -59,6 +60,13 @@ def unit_failure_distribution(data):
 
     # Aplicar layout estándar
     fig_failures_per_vehicle = standard_layout(fig_failures_per_vehicle)
+
+    if simplified:
+        fig_failures_per_vehicle.update_layout(
+            xaxis_title=None,
+            yaxis_title=None,
+            margin=dict(t=30, l=0, r=40, b=0),
+        )
 
     # Personalizar estilo
     fig_failures_per_vehicle.update_traces(
