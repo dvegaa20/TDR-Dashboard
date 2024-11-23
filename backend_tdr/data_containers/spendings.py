@@ -138,8 +138,10 @@ def maintenance_comparison_chart(data, simplified=False):
         fig_cost_comparison.update_layout(
             xaxis_title=None,
             yaxis_title=None,
-            margin=dict(t=30, l=0, r=40, b=0),
+            margin=dict(t=30, l=0, r=10, b=0),
             showlegend=False,
+            title="Comparación de Costos de Mantenimiento",
+            title_font=dict(size=16),
         )
 
     return html.Div(

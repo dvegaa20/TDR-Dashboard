@@ -30,6 +30,69 @@ def standard_graph():
     }
 
 
+def actividades_por_parte(data, simplified=False):
+    """
+    Generates a stacked bar chart showing the count of repairs by PartNumber grouped by month.
+
+    Args:
+    data: The data to generate the chart from. Must contain the columns "OpenedDate" and "PartNumber".
+
+    Returns:
+    A Dash HTML component containing the chart.
+    """
+
+    data["OpenedDate"] = pd.to_datetime(data["OpenedDate"])
+
+    data["Mes"] = data["OpenedDate"].dt.to_period("M").astype(str)
+
+    actividades_mensuales = (
+        data.groupby(["Mes", "PartNumber"])
+        .size()
+        .reset_index(name="CantidadActividades")
+    )
+
+    fig_actividades = px.bar(
+        actividades_mensuales,
+        x="Mes",
+        y="CantidadActividades",
+        color="PartNumber",
+        title="Recuento de Reparaciones por Parte y Mes",
+        labels={
+            "Mes": "Mes",
+            "CantidadActividades": "Cantidad de Actividades",
+            "PartNumber": "Número de Parte:",
+        },
+    )
+
+    fig_actividades = standard_layout(fig_actividades)
+
+    fig_actividades.update_layout(
+        xaxis=dict(
+            title=None,
+            ticklabelstandoff=10,
+        )
+    )
+
+    if simplified:
+        fig_actividades.update_layout(
+            xaxis_title=None,
+            yaxis_title=None,
+            margin=dict(t=30, l=20, r=20, b=0),
+            showlegend=False,
+        )
+
+    return html.Div(
+        style=standard_style(height="89vh"),
+        children=[
+            dcc.Graph(
+                id="actividades-por-partnumber-mes",
+                figure=fig_actividades,
+                **standard_graph(),
+            )
+        ],
+    )
+
+
 def frecuencia_actividades_mantenimiento(data):
     """
     Generates a bar chart showing the frequency of maintenance activities by type.
@@ -70,7 +133,7 @@ def frecuencia_actividades_mantenimiento(data):
             tickangle=45,
             tickfont=dict(size=8),
             title=None,
-        )
+        ),
     )
 
     fig_actividades.update_traces(
@@ -89,64 +152,6 @@ def frecuencia_actividades_mantenimiento(data):
     )
 
 
-def actividades_por_parte(data):
-    """
-    Generates a stacked bar chart showing the count of repairs by PartNumber grouped by month.
-
-    Args:
-    data: The data to generate the chart from. Must contain the columns "OpenedDate" and "PartNumber".
-
-    Returns:
-    A Dash HTML component containing the chart.
-    """
-    # Asegurarse de que las fechas están en formato datetime
-    data["OpenedDate"] = pd.to_datetime(data["OpenedDate"])
-
-    # Crear columna para agrupar por mes y año
-    data["Mes"] = data["OpenedDate"].dt.to_period("M").astype(str)
-
-    # Agrupar y contar actividades por PartNumber y mes
-    actividades_mensuales = (
-        data.groupby(["Mes", "PartNumber"])
-        .size()
-        .reset_index(name="CantidadActividades")
-    )
-
-    # Crear la gráfica
-    fig_actividades = px.bar(
-        actividades_mensuales,
-        x="Mes",
-        y="CantidadActividades",
-        color="PartNumber",
-        title="Recuento de Reparaciones por Parte y Mes",
-        labels={
-            "Mes": "Mes",
-            "CantidadActividades": "Cantidad de Actividades",
-            "PartNumber": "Número de Parte:",
-        },
-    )
-
-    # Aplicar diseño estándar
-    fig_actividades = standard_layout(fig_actividades)
-
-    fig_actividades.update_layout(
-        xaxis=dict(
-            title=None,
-        )
-    )
-
-    return html.Div(
-        style=standard_style(height="89vh"),
-        children=[
-            dcc.Graph(
-                id="actividades-por-partnumber-mes",
-                figure=fig_actividades,
-                **standard_graph(),
-            )
-        ],
-    )
-
-
 def duracion_promedio_por_tipo(data):
     """
     Generates a bar chart showing the average duration of maintenance activities by order type.
@@ -157,14 +162,12 @@ def duracion_promedio_por_tipo(data):
     Returns:
     A Dash HTML component containing the chart.
     """
-    # Asegurarse de que las fechas están en formato datetime
+
     data["OpenedDate"] = pd.to_datetime(data["OpenedDate"])
     data["ClosedDate"] = pd.to_datetime(data["ClosedDate"])
 
-    # Calcular duración en días
     data["DuracionDias"] = (data["ClosedDate"] - data["OpenedDate"]).dt.days
 
-    # Agrupar por tipo de orden
     duracion_promedio = (
         data.groupby("PartNumber")["DuracionDias"]
         .mean()
@@ -174,7 +177,6 @@ def duracion_promedio_por_tipo(data):
 
     duracion_promedio = duracion_promedio[duracion_promedio["DuracionDias"] > 2]
 
-    # Crear la gráfica
     fig_duracion = px.bar(
         duracion_promedio,
         x="PartNumber",

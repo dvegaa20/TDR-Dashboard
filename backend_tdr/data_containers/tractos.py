@@ -49,16 +49,14 @@ def unit_failure_distribution(data, simplified=False):
         .rename(columns={"JobCode": "CantidadFallas"})
     )
 
-    # Crear gráfico
     fig_failures_per_vehicle = px.bar(
         failures_per_vehicle,
-        x="UnitNumber",  # Mostrar solo los UnitNumbers existentes
+        x="UnitNumber",
         y="CantidadFallas",
         title="Distribución de Fallas por Tracto",
         text="CantidadFallas",
     )
 
-    # Aplicar layout estándar
     fig_failures_per_vehicle = standard_layout(fig_failures_per_vehicle)
 
     if simplified:
@@ -68,7 +66,6 @@ def unit_failure_distribution(data, simplified=False):
             margin=dict(t=30, l=0, r=40, b=0),
         )
 
-    # Personalizar estilo
     fig_failures_per_vehicle.update_traces(
         hovertemplate="Tracto (Unidad) = %{x}<br>Cantidad de Fallas = %{y}",
         marker=dict(
@@ -77,7 +74,6 @@ def unit_failure_distribution(data, simplified=False):
         textfont=dict(size=10),
     )
 
-    # Asegurar que solo se muestran UnitNumbers reales
     fig_failures_per_vehicle.update_layout(
         xaxis=dict(
             type="category",
