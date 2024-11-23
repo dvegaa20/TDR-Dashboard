@@ -12,7 +12,7 @@ function Dashboard() {
             style={{ gridTemplateColumns: "2.5fr 1.5fr", gap: "1rem" }}
           >
             <GraphContainer
-              title="Estadísticas de Mantenimiento"
+              title="Estadísticas Generales"
               linkTo="/stats"
               iframeSrc="http://127.0.0.1:8050/dash_monthly_repair_distribution"
             />

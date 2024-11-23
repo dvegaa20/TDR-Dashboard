@@ -8,7 +8,7 @@ function Trucks() {
       <div className="p-4 sm:ml-64">
         <div className="p-4 rounded-lg dark:border-gray-700">
           <h2 className="text-customBlue text-lg font-semibold mb-4">
-            Estado de Tractos
+            Estado de los Tractos
           </h2>
           <Component
             iframeSrcs={[
