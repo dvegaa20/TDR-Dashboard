@@ -1,5 +1,5 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 
 const DashboardGraphContainer = ({ title, linkText, linkTo, iframeSrc }) => {
   return (
@@ -19,14 +19,14 @@ const DashboardGraphContainer = ({ title, linkText, linkTo, iframeSrc }) => {
           src={iframeSrc}
           style={{
             border: "none",
-            height: "100%",
+            height: "40vh",
             width: "100%",
             borderRadius: "10px",
           }}
         ></iframe>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardGraphContainer
+export default DashboardGraphContainer;

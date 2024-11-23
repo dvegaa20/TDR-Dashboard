@@ -1,5 +1,5 @@
-"use client"
-import { Carousel } from "flowbite-react"
+"use client";
+import { Carousel } from "flowbite-react";
 
 const customTheme = {
   root: {
@@ -32,26 +32,20 @@ const customTheme = {
     base: "flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-lg",
     snap: "snap-x",
   },
-}
+};
 
-export function ChartCarousel({
-  iframeSrc1,
-  iframeSrc2,
-  iframeSrc3,
-  iframeSrc4,
-}) {
-  const iframeStyle = { border: "none", height: "100%", width: "100%" }
+export function ChartCarousel({ iframeSrcs }) {
+  const iframeStyle = { border: "none", height: "100%", width: "100%" };
 
   return (
     <div className="h-96 sm:h-128 xl:h-160 2xl:h-192">
       <Carousel slide={false} theme={customTheme}>
-        <iframe src={iframeSrc1} style={iframeStyle}></iframe>
-        <iframe src={iframeSrc2} style={iframeStyle}></iframe>
-        <iframe src={iframeSrc3} style={iframeStyle}></iframe>
-        <iframe src={iframeSrc4} style={iframeStyle}></iframe>
+        {iframeSrcs.map((src, index) => (
+          <iframe key={index} src={src} style={iframeStyle}></iframe>
+        ))}
       </Carousel>
     </div>
-  )
+  );
 }
 
-export default ChartCarousel
+export default ChartCarousel;

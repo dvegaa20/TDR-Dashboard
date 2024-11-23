@@ -10,7 +10,12 @@ function Spendings() {
           <h2 className="text-customBlue text-lg font-semibold mb-4">
             Estadísticas de Costos
           </h2>
-          <ChartCarousel iframeSrc1="https://tdr-dashboard.onrender.com/calculate_maintenance_costs" />
+          <ChartCarousel
+            iframeSrcs={[
+              "http://127.0.0.1:8050/maintenance_costs",
+              "http://127.0.0.1:8050/cost_distribution",
+            ]}
+          />
           <Table />
         </div>
       </div>

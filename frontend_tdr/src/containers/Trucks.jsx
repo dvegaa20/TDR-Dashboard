@@ -11,10 +11,12 @@ function Trucks() {
             Estado de Tractos
           </h2>
           <Component
-            iframeSrc1="https://tdr-dashboard.onrender.com/tractos_failure_distribution"
-            iframeSrc2="https://tdr-dashboard.onrender.com/tractos_cost_distribution"
-            iframeSrc3="https://tdr-dashboard.onrender.com/tractos_age"
-            iframeSrc4="https://tdr-dashboard.onrender.com/mtbf"
+            iframeSrcs={[
+              "https://tdr-dashboard.onrender.com/tractos_failure_distribution",
+              "https://tdr-dashboard.onrender.com/tractos_cost_distribution",
+              "http://127.0.0.1:8050/tractos_performance",
+              "https://tdr-dashboard.onrender.com/tractos_age",
+            ]}
           />
           <Table />
         </div>

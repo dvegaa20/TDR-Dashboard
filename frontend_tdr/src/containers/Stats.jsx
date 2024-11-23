@@ -11,10 +11,12 @@ function Stats() {
             Estadísticas de Mantenimiento
           </h2>
           <ChartCarousel
-            iframeSrc1="https://tdr-dashboard.onrender.com/failure_frequency"
-            iframeSrc2="https://tdr-dashboard.onrender.com/avg_repair_frecuency"
-            iframeSrc3="https://tdr-dashboard.onrender.com/monthly_repair_distribution"
-            iframeSrc4="https://tdr-dashboard.onrender.com/mtbf"
+            iframeSrcs={[
+              "http://127.0.0.1:8050/failure_frequency",
+              "https://tdr-dashboard.onrender.com/avg_repair_frecuency",
+              "https://tdr-dashboard.onrender.com/monthly_repair_distribution",
+              "https://tdr-dashboard.onrender.com/mtbf",
+            ]}
           />
           <Table />
         </div>
