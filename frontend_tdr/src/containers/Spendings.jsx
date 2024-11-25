@@ -1,11 +1,11 @@
-import React from "react";
-import ChartCarousel from "../components/Carousel";
-import Table from "../components/Table";
+import React from "react"
+import ChartCarousel from "../components/Carousel"
+import Table from "../components/Table"
 
 function Spendings() {
   return (
     <div>
-      <div className="p-4 sm:ml-64">
+      <div className="p-2 sm:ml-64">
         <div className="p-4 rounded-lg dark:border-gray-700">
           <h2 className="text-customBlue text-lg font-semibold mb-4">
             Resumen de Costos
@@ -20,7 +20,7 @@ function Spendings() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Spendings;
+export default Spendings

@@ -41,7 +41,7 @@ export function ChartCarousel({ iframeSrcs }) {
     <div className="h-96 sm:h-128 xl:h-160 2xl:h-192">
       <Carousel slide={false} theme={customTheme}>
         {iframeSrcs.map((src, index) => (
-          <iframe key={index} src={src} style={iframeStyle}></iframe>
+          <iframe key={index} src={src} style={iframeStyle} title={`iframe-${index}`}></iframe>
         ))}
       </Carousel>
     </div>
