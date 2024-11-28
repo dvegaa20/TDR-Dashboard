@@ -15,16 +15,16 @@ function Table() {
 
       switch (location.pathname) {
         case "/stats":
-          endpoint = "http://127.0.0.1:8050/api/data/stats";
+          endpoint = "https://tdr-dashboard.onrender.com/api/data/stats";
           break;
         case "/tractos":
-          endpoint = "http://127.0.0.1:8050/api/data/tractos";
+          endpoint = "https://tdr-dashboard.onrender.com/api/data/tractos";
           break;
         case "/gastos":
-          endpoint = "http://127.0.0.1:8050/api/data/spendings";
+          endpoint = "https://tdr-dashboard.onrender.com/api/data/spendings";
           break;
         case "/mantenimientos":
-          endpoint = "http://127.0.0.1:8050/api/data/maintenance";
+          endpoint = "https://tdr-dashboard.onrender.com/api/data/maintenance";
           break;
       }
 

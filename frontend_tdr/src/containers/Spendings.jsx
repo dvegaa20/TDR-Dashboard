@@ -1,6 +1,6 @@
-import React from "react"
-import ChartCarousel from "../components/Carousel"
-import Table from "../components/Table"
+import React from "react";
+import ChartCarousel from "../components/Carousel";
+import Table from "../components/Table";
 
 function Spendings() {
   return (
@@ -12,15 +12,15 @@ function Spendings() {
           </h2>
           <ChartCarousel
             iframeSrcs={[
-              "http://127.0.0.1:8050/maintenance_costs",
-              "http://127.0.0.1:8050/cost_distribution",
+              "https://tdr-dashboard.onrender.com/maintenance_costs",
+              "https://tdr-dashboard.onrender.com/cost_distribution",
             ]}
           />
           <Table />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Spendings
+export default Spendings;

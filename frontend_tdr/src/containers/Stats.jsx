@@ -12,9 +12,9 @@ function Stats() {
           </h2>
           <ChartCarousel
             iframeSrcs={[
-              "http://127.0.0.1:8050/monthly_repair_distribution",
-              "http://127.0.0.1:8050/failure_frequency",
-              "http://127.0.0.1:8050/avg_repair_frecuency",
+              "https://tdr-dashboard.onrender.com/monthly_repair_distribution",
+              "https://tdr-dashboard.onrender.com/failure_frequency",
+              "https://tdr-dashboard.onrender.com/avg_repair_frecuency",
             ]}
           />
           <Table />

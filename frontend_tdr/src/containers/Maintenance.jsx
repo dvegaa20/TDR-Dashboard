@@ -12,9 +12,9 @@ function Maintenance() {
           </h2>
           <Component
             iframeSrcs={[
-              "http://127.0.0.1:8050/part_number",
-              "http://127.0.0.1:8050/maintenance_activities",
-              "http://127.0.0.1:8050/time_to_complete",
+              "https://tdr-dashboard.onrender.com/part_number",
+              "https://tdr-dashboard.onrender.com/maintenance_activities",
+              "https://tdr-dashboard.onrender.com/time_to_complete",
             ]}
           />
           <Table />

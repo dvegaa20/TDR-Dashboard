@@ -12,10 +12,10 @@ function Trucks() {
           </h2>
           <Component
             iframeSrcs={[
-              "http://127.0.0.1:8050/tractos_failure_distribution",
-              "http://127.0.0.1:8050/tractos_cost_distribution",
-              "http://127.0.0.1:8050/tractos_performance",
-              "http://127.0.0.1:8050/tractos_age",
+              "https://tdr-dashboard.onrender.com/tractos_failure_distribution",
+              "https://tdr-dashboard.onrender.com/tractos_cost_distribution",
+              "https://tdr-dashboard.onrender.com/tractos_performance",
+              "https://tdr-dashboard.onrender.com/tractos_age",
             ]}
           />
           <Table />
