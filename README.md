@@ -29,10 +29,11 @@ The TDR-Dashboard leverages the strengths of both Dash and React to deliver a se
 ### **Steps to Run**
 
 #### **Dash Server**
+Go to backend_tdr folder
 1. Create a Python virtual environment:
-   ```bash
-   python -m venv venv
-   ```
+```
+ python -m venv venv
+```
 2. Activate the virtual environment
 - Windows:
 ```
@@ -52,6 +53,8 @@ python app.py
 ```
 
 ### React frontend
+Go to frontend_tdr folder
+
 1. Install dependencies:
 ```
 npm install
